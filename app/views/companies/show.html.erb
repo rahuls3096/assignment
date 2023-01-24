@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<div class="card">
+  <div class="card-body">
+      <strong>Company name:</strong>
+      <%= @company.company_name %> <br>
+      <strong>Company address:</strong>
+      <%= @company.company_address %> <br>
+
+    <%= link_to 'Edit', edit_company_path(@company) %> |
+    <%= link_to 'Back', companies_path %>
+  </div>
+</div>
+
+<br>
+ <p><%= link_to 'Add Employees', new_employee_path(company_id: @company), class: 'btn btn-primary' %> </p>
+
+<br>
+<h3>Employees List</h3>
+<%if @company.employees.present?  %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Email</th>
+        <th scope="col">Age</th>
+        <th scope="col">Contact no</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <%= render @company.employees, company_id: @company.id %>
+    </tbody>
+  </table>
+<% end %>

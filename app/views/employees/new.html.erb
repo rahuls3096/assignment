@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+<br>
+<div class="card">
+    <div class="card-header">
+       <h3>New employee</h3>
+    </div>
+    <div class="card-body">
+        <%= form_for(@employee) do |f| %>
+            <% if @employee.errors.any? %>
+                <div id="error_explanation">
+                    <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+                    <ul>
+                    <% @employee.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                </div>
+            <% end %>
+            <div class="field">
+                <%= f.label 'Add File', class:"form-label" %>
+                <%= f.file_field :file, accept: 'xls', class:"form-control" %>
+                <%= f.hidden_field :company_id, value: params[:company_id] %>
+            </div>
+            <div class="actions">
+                <%= f.submit 'Upload Excel', class:"btn btn-primary" %>
+            </div>
+        <% end %>
+    </div>
+    <div class="card-footer">
+        <%= link_to 'Back', company_path(params[:company_id]) %>
+    </div>
+</div>
